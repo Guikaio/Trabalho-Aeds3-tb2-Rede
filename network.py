@@ -189,6 +189,43 @@ class Rede:
 
 
 
+    def bellman_ford(self, s, t):
+        """Obtem o caminho minimo de s para todos os vertices do grafo (funciona para grafos com arestas negativas)."""
+        dist = [float('inf') for v in range(self.num_vert)]  # Inicializa vetor dist com infinito em cada pos.
+        pred = [None for v in range(self.num_vert)]  # Inicializa vetor pred com None em cada pos.
+        dist[s] = 0  # Distancia para origem eh 0
+        E = [(None, None, None, None) for x in range(
+            self.num_arestas)]  # Inicializa uma lista de tuplas que contera as arestas e seus respectivos pesos. indice[0][1] possuem as arestas e o [2] o peso
+        x = 0  # Variavel auxiliar para ajudar a atribuir valores na lista E
+
+        for i in range(len(self.lista_adj)):
+            for j in range(len(self.lista_adj[i])):
+                print("-----------E------------", E)
+                E[x] = (i, self.lista_adj[i][j][0], self.lista_adj[i][j][1], self.lista_adj[i][j][2])
+                x = x + 1
+
+        # Laco principal
+        for i in range(self.num_vert - 1):  # Percorremos todas os vertices do grafo
+            trocou = False  # Flag para encerrar o algoritmo mais cedo, salvando custos
+            for (u, v, w) in E:  # Percorremos todas as arestas dos vertices do grafo
+                if dist[v] > dist[u] + w:  # Se encontrar um caminho melhor atraves de determinada aresta...
+                    dist[v] = dist[u] + w
+                    pred[v] = u
+                    trocou = True  # Atualiza flag, sinalizando que houve troca
+
+        # obtendo caminho
+        caminho = [t]
+        x = t
+        # Itera ate encontrar a origem, assim obtendo todo o caminho
+        while x != s:
+            x = pred[x]
+            caminho.append(x)
+        # Inverte o caminho encontrado anteriormente, pois a ordem do vetor pred eh inversa
+        caminho.reverse()
+
+        if trocou == False:  # Se percorremos todo os vertices/arestas e nao houve troca, significa que podemos encerrar o algoritmo
+            return caminho
+
 
 
 
