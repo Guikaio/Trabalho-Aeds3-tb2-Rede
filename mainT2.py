@@ -2,11 +2,17 @@ import network
 
 rede = network.Rede()
 
-rede.teste("professores_toy.csv","disciplinas_toy.csv")
-print(rede.lista_adj)
-print("................................")
-print(rede.mat_adj)
-#print(f"-----BELLMAN FORD------{rede.bellman_ford(0, rede.num_vert-1)}")
-#print("MATRIZ:\n", rede.mat_adj)
-#print("LISTA:\n", rede.lista_adj)
-#rede.teste("disciplinas_toy.csv","professores_toy.csv")
+print("MENU")
+escolha = int(input("Digite o numero correspondendo a qual arquivo quer usar:\n1 - toy\n2 - padrao\n"))
+while (True):
+    if escolha == 1:
+        rede.constroi_rede("professores_toy.csv","disciplinas_toy.csv")
+        print(rede.imprime_dados("professores_toy.csv", "disciplinas_toy.csv", rede.scm(0, rede.num_vert-1), rede.dic))
+        break
+    elif escolha == 2:
+        rede.constroi_rede("professores.csv","disciplinas.csv")
+        print(rede.imprime_dados("professores.csv", "disciplinas.csv", rede.scm(0, rede.num_vert-1), rede.dic))
+        break
+    else:
+        print("Valor invalido")
+print("Fim do programa!")
