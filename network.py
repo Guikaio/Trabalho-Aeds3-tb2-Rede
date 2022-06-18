@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 class Rede:
     def __init__(self, num_vert=0, num_arestas=0, lista_adj=None, mat_adj=None, mat_cap=None):
         self.num_vert = num_vert
@@ -48,7 +47,7 @@ class Rede:
 
         # Le os arquivos de disciplinas e retorna os dados
 
-    def ler_arquivo(self, arq_disc):
+    def ler_disciplinas(self, arq_disc):
         print("Lendo arquivo disciplinas...\n")
 
         df_disc = pd.read_csv(arq_disc, sep=";") #recebe o arquivo
@@ -116,7 +115,7 @@ class Rede:
         self.lista_adj[0].pop(0)
 
 
-    # Testa as funções que foram criadas
+    #constroi a rede
     def constroi_rede(self, professores, disciplinas):
         (list_professores, lista_teste, lista_disciplina_ofertada) = self.lerprof(professores)  # Obtendo dados de professores
         list_disciplinas = self.ler_arquivo(disciplinas)  # Obtendo os dados das disciplinas
